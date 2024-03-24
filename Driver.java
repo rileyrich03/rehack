@@ -5,7 +5,6 @@ public class Driver
 	private Monkey[] table;
 	private Player player;
 	private String word;
-    private int wallet;
     private Scanner playerInput;
     private int wager;
     private Monkey winner;
