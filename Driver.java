@@ -32,26 +32,35 @@ public class Driver
 	{
         Driver game = new Driver();
 		game.startGame();
-		boolean flag = false;
-		while(!flag)
+		boolean roundFlag = false;
+		do
 		{
-			for(int i = 0;i < game.table.length; i++)
+			while(!roundFlag)
 			{
-				Monkey monkey = game.table[i];
-				monkey.chooseGuess();
-				monkey.lookWord(game.word);
-				flag = game.checkEndRound();
-				if(flag)
-					i = game.table.length;
+				for(int i = 0;i < game.table.length; i++)
+				{
+					Monkey monkey = game.table[i];
+					monkey.chooseGuess();
+					monkey.lookWord(game.word);
+					roundFlag = game.checkEndRound();
+					if(roundFlag)
+						i = game.table.length;
+				}
 			}
-		}
-		game.endRound();
+			game.endRound();
+			roundFlag = false;
+		} while(!game.checkEndGame());
+		//game.endGame();
 	}
 
 	public void startGame()
 	{
+		System.out.print("1: inky\n"
+		               + "2: blinky\n"
+					   + "3: pinky\n"
+					   + "4: Clyde\n");
         System.out.print("Choose a monkey's ID Badge: ");
-        int monkeyChoice = playerInput.nextInt();
+        int monkeyChoice = (playerInput.nextInt() - 1) % 4;
 
         System.out.print("\nChoose your Difficulty (1/2): ");
         this.difficultyChoice = playerInput.nextInt();
@@ -61,12 +70,11 @@ public class Driver
         System.out.print("Choose a wager: ");
 
         wager = playerInput.nextInt();
-		System.out.println("Your wager: " + wager);
         if(player.getWallet() < wager)
         {
             while(player.getWallet() < wager)
             {
-            System.out.println("choose a bet lower than your wallet!");
+            System.out.println("choose a bet lower than your wallet!\nChoose a wager: ");
             wager = playerInput.nextInt();
             }
         }
@@ -79,7 +87,17 @@ public class Driver
 
 	public boolean checkEndGame()
 	{
-		return player.getWallet() <= 0;
+		if ((player.getWallet() <= 0) && (wager == 0))
+		{
+			System.out.println("\nYOURE BROKE!! THE GAME HAS CONCLUDED!!!\n");		
+			endGame();
+		} else if (player.getWallet() >= 10000)
+		{
+			System.out.println("\nOH NO! Your pockets were too full and swag too nice.\n"
+			                 + "The monkeys stole all your money. THE GAME HAS CONCLUDED!!!");
+			endGame();
+		}
+		return (player.getWallet() <= 0) && (wager == 0);
 
 	}
 
@@ -98,16 +116,56 @@ public class Driver
 
 	public void endGame()
 	{
-		System.out.println("THE GAME HAS CONCLUDED!!!\n");		
+		System.out.println("Would you like to play again? y/n");
+		System.exit(0);		
 	}
 
 	public void endRound()
 	{
 		System.out.println(winner.getName().toUpperCase() + " HAS GUESSED THE WORD!!!\n");		
-		if(player.getChoice() == winner)
-		{
+		//player payout
+		if(player.getChoice() == winner) {
 			player.setWallet(player.getWallet() + wager * 4);
+			System.out.println(wager * 4 + " has been added to your wallet.");		
+		} else {
+			System.out.println("You have lost " + wager + " to fellow Monkey Money Men.");		
 		}
+			wager = 0;
+		System.out.println("Wallet: " + player.getWallet());
+		//Reset monkey correct guess
+		for(Monkey monkey : table)
+			monkey.setCorrect(0);
+		
+		//GO AGAIN
+		if(checkEndGame())
+		{
+			return;
+		}
+
+		//reprompt monkey
+		System.out.print("1: inky\n"
+			           + "2: blinky\n"
+			           + "3: pinky\n"
+			           + "4: Clyde\n");
+		System.out.print("Choose a monkey's ID Badge: ");
+		player.setChoice(table[(playerInput.nextInt() - 1) % 4]);
+
+		//reprompt wager
+        System.out.print("Choose a wager: ");
+		wager = playerInput.nextInt();
+        if(player.getWallet() < wager)
+        {
+            while(player.getWallet() < wager)
+            {
+            System.out.println("choose a bet lower than your wallet!\nChoose a wager: ");
+            wager = playerInput.nextInt();
+            }
+        }
+		player.setWallet(player.getWallet() - wager);
+
+		System.out.print("Choose your Word: ");
+		playerInput.nextLine();
+		setWord(playerInput.nextLine().toUpperCase());
 	}
 
 	public void setWord(String word)
