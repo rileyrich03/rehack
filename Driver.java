@@ -7,7 +7,8 @@ public class Driver
 	private String word;
     private int wallet;
     private Scanner playerInput;
-    int wager;
+    private int wager;
+    private Monkey winner;
 
 	public Driver(String word) 
 	{
