@@ -199,4 +199,19 @@ public class Driver
 			monkey.setWordLength(word.length());
 	}
 
+	public String getWord()
+	{
+		return this.word;
+	}
+
+	public Monkey[] getTable()
+	{
+		return this.table;
+	}
+
+	public String getMonkeyName(int i)
+	{
+		return table[i].getName();
+	}
+
 }
