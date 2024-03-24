@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Monkey{
 	private String name;
@@ -34,8 +35,17 @@ public class Monkey{
 			{
 				correct++;
 				System.out.print(this.name.toUpperCase() + " HAS LOCKED IN ");
+				try
+				{
+					TimeUnit.MILLISECONDS.sleep(350);
+				} 
+				catch (InterruptedException ie) 
+				{
+					System.out.println("ERROR ERROR ERROR");
+					System.exit(0);
+				}
 				for(int j = 0; j < correct; j++)
-					System.out.print(guess[j]);
+				System.out.print(guess[j]);
 				System.out.println();
 			}
 			else

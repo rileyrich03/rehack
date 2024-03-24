@@ -32,16 +32,18 @@ public class Driver
 	{
         Driver game = new Driver();
 		game.startGame();
-		while(!game.checkEndRound())
+		boolean flag = false;
+		while(!flag)
 		{
-			for(Monkey monkey : game.table)
+			for(int i = 0;i < game.table.length; i++)
 			{
+				Monkey monkey = game.table[i];
 				monkey.chooseGuess();
-				System.out.println(monkey.getName() + " says " + monkey.printGuess());
 				monkey.lookWord(game.word);
-				
+				flag = game.checkEndRound();
+				if(flag)
+					i = game.table.length;
 			}
-			
 		}
 		game.endRound();
 	}
@@ -70,6 +72,8 @@ public class Driver
             }
         }
 		player.setWallet(player.getWallet() - wager);
+
+		System.out.println("Choose your Word: ");
 		playerInput.nextLine();
 		setWord(playerInput.nextLine());
 	}
@@ -84,7 +88,7 @@ public class Driver
 	{
 		for (Monkey monkey : table) 
         {
-            if(monkey.getCorrect() == this.word.length())
+            if(word.equals(monkey.printGuess()))
             {
 				winner = monkey;
                 return true;
@@ -95,17 +99,12 @@ public class Driver
 
 	public void endGame()
 	{
-		for(Monkey monkey : table)
-		{
-			if (monkey.getCorrect() == word.length());
-			{
-				System.out.println(monkey.getName().toUpperCase() + " HAS GUESSED THE WORD!!!\n");		
-			}
-		}
+		System.out.println("THE GAME HAS CONCLUDED!!!\n");		
 	}
 
 	public void endRound()
 	{
+		System.out.println(winner.getName().toUpperCase() + " HAS GUESSED THE WORD!!!\n");		
 		if(player.getChoice() == winner)
 		{
 			player.setWallet(player.getWallet() + wager * 4);
