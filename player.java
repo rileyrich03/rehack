@@ -1,13 +1,12 @@
 
 public class player
 {
-    private int monkey;
     private int monkeyID;
     private int wager;
     private int wallet;
 
 
-    public player(int monkeyID, int Wager, int wallet)
+    public player(int monkeyID, int wager, int wallet)
     {
         this.monkeyID = monkeyID;
         this.wager = wager;
@@ -17,7 +16,7 @@ public class player
 
     public void setChoice(int monkeyID)
     {
-        this.MonkeyID = monkeyID;
+        this.monkeyID = monkeyID;
     }
 
 
@@ -40,12 +39,12 @@ public class player
     }
 
 
-    public void setMoney(int money)
+    public void setMoney(int wallet)
     {
-        this.wallet = money
+        this.wallet = wallet;
     }
 
-    
+
     public int getMoney()
     {
         return this.wallet;
