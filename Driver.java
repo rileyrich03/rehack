@@ -37,9 +37,12 @@ public class Driver
 		{
 			for(Monkey monkey : game.table)
 			{
-				monkey.chooseWord();
-				System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
+				monkey.chooseGuess();
+				System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printGuess());
+				monkey.lookWord(game.word);
 			}
+			if (monkey.getCorrect() == game.word.length());
+				System.out.println(monkey.getName() + "HAS GUESSED THE WORD!!!\n");
 		}
 	}
 
@@ -66,7 +69,9 @@ public class Driver
             wager = playerInput.nextInt();
             }
         }
-		player.setWallet(player.getWallet() - wager);   
+		player.setWallet(player.getWallet() - wager);
+
+		this.word = playerInput.nextLine();
 	}
 
 	public boolean checkEndGame()

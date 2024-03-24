@@ -17,15 +17,34 @@ public class Monkey{
 		this.name = name;
 		this.monkeyID = monkeyID;
 		this.correct = 0;
-		this.word = new char[wordLength];
+		this.guess = new char[wordLength];
 	}
 
 	public void chooseWord()
 	{
 		Random rand = new Random();
-		int numLetters = this.word.length;
+		int numLetters = this.guess.length;
 		for(int i = correct; i < numLetters; i++)
-			word[i] = (char)(65 + rand.nextInt(26));
+			guess[i] = (char)(65 + rand.nextInt(26));
+	}
+
+	public boolean lookWord(String word)
+	{
+		char[] wordArr = word.toCharArray();
+		for(int i = correct; i < guess.length; i++)
+		{
+			if(wordArr[i] == guess[i])
+			{
+				correct++;
+				System.out.print(this.name.toUpperCase() + " HAS LOCKED IN ");
+				for(int j = 0; j < correct; j++)
+					System.out.print(guess[j]);
+				System.out.println();
+			}
+			else
+				return false;
+		}
+		return true;
 	}
 	public int getCorrect()
 	{
@@ -35,22 +54,22 @@ public class Monkey{
 	{
 		this.correct = correct;
 	}
-	public String printWord()
+	public String printGuess()
 	{
-		return new String(word);
+		return new String(guess);
 	}
-	public char[] getWord()
+	public char[] getGuess()
 	{
-		return this.word;
+		return this.guess;
 	}
-	public void setWord(String word)
+	public void setGuess(String guess)
 	{
-		this.word = word.toCharArray();
+		this.guess = guess.toCharArray();
 	}
 	
-	public void setWord(char[] word)
+	public void setWord(char[] guess)
 	{
-		this.word = word;
+		this.guess = guess;
 	}
 	public String getName()
 	{
