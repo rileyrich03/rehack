@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Driver
 {
@@ -62,9 +63,9 @@ public class Driver
         System.out.print("Choose a monkey's ID Badge: ");
         int monkeyChoice = (playerInput.nextInt() - 1) % 4;
 
-        System.out.print("\nChoose your Difficulty (1/2): ");
+        /*System.out.print("\nChoose your Difficulty (1/2): ");
         this.difficultyChoice = playerInput.nextInt();
-
+		*/
 		player = new Player(table[monkeyChoice]);
 		System.out.println("\nWallet: " + player.getWallet());
         System.out.print("Choose a wager: ");
@@ -82,7 +83,14 @@ public class Driver
 
 		System.out.print("Choose your Word: ");
 		playerInput.nextLine();
-		setWord(playerInput.nextLine().toUpperCase());
+		String string = playerInput.nextLine().toUpperCase();
+		while(!Pattern.matches("[A-Z]+",string)) 
+		{
+			System.out.println("Word must only contain letters.");
+			System.out.print("Choose your Word: ");
+			string = playerInput.nextLine().toUpperCase();
+		}
+		setWord(string);
 	}
 
 	public boolean checkEndGame()
@@ -94,7 +102,7 @@ public class Driver
 		} else if (player.getWallet() >= 10000)
 		{
 			System.out.println("\nOH NO! Your pockets were too full and swag too nice.\n"
-			                 + "The monkeys stole all your money. THE GAME HAS CONCLUDED!!!");
+			                 + "The monkeys stole all your money...THE GAME HAS CONCLUDED!!!");
 			endGame();
 		}
 		return (player.getWallet() <= 0) && (wager == 0);
