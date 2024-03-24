@@ -32,10 +32,15 @@ public class Driver
 	public static void main(String[] args)
 	{
         Driver game = new Driver("Word");
-		for(Monkey monkey : game.table)
+		game.startGame();
+
+		while(!game.checkEndGame())
 		{
-			monkey.chooseWord();
-			System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
+			for(Monkey monkey : game.table)
+			{
+				monkey.chooseWord();
+				System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
+			}
 		}
 	}
 
@@ -66,7 +71,7 @@ public class Driver
 
 	public boolean checkEndGame()
 	{
-		return false;
+		return player.getMoney() <= 0;
 	}
 
 	public boolean checkEndRound()
