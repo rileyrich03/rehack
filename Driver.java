@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Driver
 {
@@ -27,28 +28,27 @@ public class Driver
         playerInput = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args)
+	public void play()
 	{
-        Driver game = new Driver();
-		game.startGame();
+		startGame();
 		boolean roundFlag = false;
 		do
 		{
 			while(!roundFlag)
 			{
-				for(int i = 0;i < game.table.length; i++)
+				for(int i = 0;i < table.length; i++)
 				{
-					Monkey monkey = game.table[i];
+					Monkey monkey = table[i];
 					monkey.chooseGuess();
-					monkey.lookWord(game.word);
-					roundFlag = game.checkEndRound();
+					monkey.lookWord(word);
+					roundFlag = checkEndRound();
 					if(roundFlag)
-						i = game.table.length;
+						i = table.length;
 				}
 			}
-			game.endRound();
+			endRound();
 			roundFlag = false;
-		} while(!game.checkEndGame());
+		} while(!checkEndGame());
 		//game.endGame();
 	}
 
@@ -61,9 +61,9 @@ public class Driver
         System.out.print("Choose a monkey's ID Badge: ");
         int monkeyChoice = (playerInput.nextInt() - 1) % 4;
 
-        System.out.print("\nChoose your Difficulty (1/2): ");
+        /*System.out.print("\nChoose your Difficulty (1/2): ");
         this.difficultyChoice = playerInput.nextInt();
-
+		*/
 		player = new Player(table[monkeyChoice]);
 		System.out.println("\nWallet: " + player.getWallet());
         System.out.print("Choose a wager: ");
@@ -81,7 +81,14 @@ public class Driver
 
 		System.out.print("Choose your Word: ");
 		playerInput.nextLine();
-		setWord(playerInput.nextLine().toUpperCase());
+		String string = playerInput.nextLine().toUpperCase();
+		while(!Pattern.matches("[A-Z]+",string)) 
+		{
+			System.out.println("Word must only contain letters.");
+			System.out.print("Choose your Word: ");
+			string = playerInput.nextLine().toUpperCase();
+		}
+		setWord(string);
 	}
 
 	public boolean checkEndGame()
@@ -93,7 +100,7 @@ public class Driver
 		} else if (player.getWallet() >= 10000)
 		{
 			System.out.println("\nOH NO! Your pockets were too full and swag too nice.\n"
-			                 + "The monkeys stole all your money. THE GAME HAS CONCLUDED!!!");
+			                 + "The monkeys stole all your money...THE GAME HAS CONCLUDED!!!");
 			endGame();
 		}
 		return (player.getWallet() <= 0) && (wager == 0);
@@ -116,6 +123,24 @@ public class Driver
 	public void endGame()
 	{
 		System.out.println("Would you like to play again? y/n");
+		boolean loop = false;
+		char choice = playerInput.nextLine().toLowerCase().charAt(0);
+		do
+		{
+			switch(choice)
+			{
+				case 'y':
+					play();
+					break;
+				case 'n':
+					System.exit(0);
+					break;
+				default:
+					loop = true;
+					System.out.println("Would you like to play again? y/n");
+					choice = playerInput.nextLine().toLowerCase().charAt(0);
+			}
+		}while (loop);
 		System.exit(0);		
 	}
 
