@@ -9,6 +9,7 @@ public class Driver
     private Scanner playerInput;
     private int wager;
     private Monkey winner;
+	private int difficultyChoice;
 
 	public Driver(String word) 
 	{
@@ -22,9 +23,6 @@ public class Driver
         table[1] = new Monkey("blinky", 1, word.length());
         table[2] = new Monkey ("pinky", 2, word.length());
         table[3] = new Monkey("Clyde", 3, word.length());
-
-        //set wallet value initial
-        this.wallet = 500;
 
         //create player input
         playerInput = new Scanner(System.in);
@@ -51,7 +49,7 @@ public class Driver
         int monkeyChoice = playerInput.nextInt();
 
         System.out.print("\nChoose your Difficulty (1/2)");
-        int difficultyChoice = playerInput.nextInt();
+        this.difficultyChoice = playerInput.nextInt();
 
         System.out.print("Choose a wager: ");
 
@@ -65,7 +63,7 @@ public class Driver
             }
         }   
         
-        player = new Player(monkeyChoice, wager, difficultyChoice);
+        player = new Player(table[monkeyChoice], wager);
 
 
 	}
@@ -82,6 +80,7 @@ public class Driver
         {
             if(monkey.getCorrect() == this.word.length())
             {
+				winner = monkey;
                 return true;
             }
         }
@@ -95,7 +94,10 @@ public class Driver
 
 	public void endRound()
 	{
-		if(player.getChoice() == )
+		if(player.getChoice() == winner)
+		{
+			player.setMoney(player.getMoney() + wager * 4);
+		}
 	}
 
 	public void setWord(String word)
