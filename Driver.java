@@ -31,15 +31,17 @@ public class Driver
 	
 	public static void main(String[] args)
 	{
+        Driver game = new Driver("Word");
+		game.startGame();
 
-        Driver game = new Driver();
-
-        game.startGame();
-
-        while(!game.checkEndGame())
-        {
-            
-        }
+		while(!game.checkEndGame())
+		{
+			for(Monkey monkey : game.table)
+			{
+				monkey.chooseWord();
+				System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
+			}
+		}
 	}
 
 	public void startGame()
