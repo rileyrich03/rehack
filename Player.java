@@ -5,13 +5,14 @@ public class Player {
     private int wager;
     private int wallet;
     private int buyIn;
-    Scanner wagerChoice;
+    private Scanner wagerChoice;
 
-    public Player(Monkey monkey, int wager, int wallet) 
+    public Player(Monkey monkey, int wager) 
     {
         this.monkey = monkey;
         this.wager = wager;
-        this.wallet = wallet;
+        //set wallet value initial
+        this.wallet = 500;
         this.wagerChoice = new Scanner(System.in);
     }
 
