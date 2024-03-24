@@ -2,25 +2,22 @@ import java.util.Random;
 
 public class Monkey{
 	private String name;
-	private char[] word;
-	private int monkeyID;
+	private char[] guess;
 	private int correct;
 	public Monkey()
 	{
 		this.name = null;
-		this.monkeyID = 0;
 		this.correct = 0;
-		this.word = new char[0];
+		this.guess = new char[0];
 	}
-	public Monkey(String name, int monkeyID, int wordLength)
+	public Monkey(String name, int monkeyID)
 	{
 		this.name = name;
-		this.monkeyID = monkeyID;
 		this.correct = 0;
-		this.guess = new char[wordLength];
+		this.guess = new char[0];
 	}
 
-	public void chooseWord()
+	public void chooseGuess()
 	{
 		Random rand = new Random();
 		int numLetters = this.guess.length;
@@ -71,6 +68,12 @@ public class Monkey{
 	{
 		this.guess = guess;
 	}
+
+	public void setWordLength(int length)
+	{
+		this.guess = new char[length];
+	}
+
 	public String getName()
 	{
 		return this.name;

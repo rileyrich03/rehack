@@ -11,18 +11,18 @@ public class Driver
     private Monkey winner;
 	private int difficultyChoice;
 
-	public Driver(String word) 
+	public Driver() 
 	{
-        this.word = word;
+        this.word = null;
 
 		//create monkey array
         table = new Monkey[4];
 
         //create each monkey
-        table[0] = new Monkey("inky", 0, word.length());
-        table[1] = new Monkey("blinky", 1, word.length());
-        table[2] = new Monkey ("pinky", 2, word.length());
-        table[3] = new Monkey("Clyde", 3, word.length());
+        table[0] = new Monkey("inky", 0);
+        table[1] = new Monkey("blinky", 1);
+        table[2] = new Monkey ("pinky", 2);
+        table[3] = new Monkey("Clyde", 3);
 
         //create player input
         playerInput = new Scanner(System.in);
@@ -30,20 +30,20 @@ public class Driver
 	
 	public static void main(String[] args)
 	{
-        Driver game = new Driver("Word");
+        Driver game = new Driver();
 		game.startGame();
-
-		while(!game.checkEndGame())
+		while(!game.checkEndRound())
 		{
 			for(Monkey monkey : game.table)
 			{
 				monkey.chooseGuess();
-				System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printGuess());
+				System.out.println(monkey.getName() + " says " + monkey.printGuess());
 				monkey.lookWord(game.word);
+				
 			}
-			if (monkey.getCorrect() == game.word.length());
-				System.out.println(monkey.getName() + "HAS GUESSED THE WORD!!!\n");
+			
 		}
+		game.endRound();
 	}
 
 	public void startGame()
@@ -70,8 +70,8 @@ public class Driver
             }
         }
 		player.setWallet(player.getWallet() - wager);
-
-		this.word = playerInput.nextLine();
+		playerInput.nextLine();
+		setWord(playerInput.nextLine());
 	}
 
 	public boolean checkEndGame()
@@ -93,9 +93,15 @@ public class Driver
         return false;
 	}
 
-	public boolean endGame()
+	public void endGame()
 	{
-		return false;
+		for(Monkey monkey : table)
+		{
+			if (monkey.getCorrect() == word.length());
+			{
+				System.out.println(monkey.getName().toUpperCase() + " HAS GUESSED THE WORD!!!\n");		
+			}
+		}
 	}
 
 	public void endRound()
@@ -109,6 +115,8 @@ public class Driver
 	public void setWord(String word)
 	{
         this.word = word;
+		for(Monkey monkey : table)
+			monkey.setWordLength(word.length());
 	}
 
 }
