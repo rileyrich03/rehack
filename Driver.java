@@ -50,19 +50,18 @@ public class Driver
 
 	public void startGame()
 	{
-        System.out.println("Choose a monkey's ID Badge: ");
+        System.out.print("Choose a monkey's ID Badge: ");
         int monkeyChoice = playerInput.nextInt();
 
-        System.out.println("\nChoose your Difficulty (1/2): ");
+        System.out.print("\nChoose your Difficulty (1/2): ");
         this.difficultyChoice = playerInput.nextInt();
 
 		player = new Player(table[monkeyChoice]);
 		System.out.println("\nWallet: " + player.getWallet());
-        System.out.println("Choose a wager: ");
+        System.out.print("Choose a wager: ");
 
         wager = playerInput.nextInt();
-		System.out.println("Your wager:" + wager);
-		System.out.println("your wallet:" + player.getWallet());
+		System.out.println("Your wager: " + wager);
         if(player.getWallet() < wager)
         {
             while(player.getWallet() < wager)
@@ -73,9 +72,9 @@ public class Driver
         }
 		player.setWallet(player.getWallet() - wager);
 
-		System.out.println("Choose your Word: ");
+		System.out.print("Choose your Word: ");
 		playerInput.nextLine();
-		setWord(playerInput.nextLine());
+		setWord(playerInput.nextLine().toUpperCase());
 	}
 
 	public boolean checkEndGame()
