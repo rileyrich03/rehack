@@ -117,6 +117,24 @@ public class Driver
 	public void endGame()
 	{
 		System.out.println("Would you like to play again? y/n");
+		boolean loop = false;
+		char choice = playerInput.nextLine().toLowerCase().charAt(0);
+		do
+		{
+			switch(choice)
+			{
+				case 'y':
+					main(null);
+					break;
+				case 'n':
+					System.exit(0);
+					break;
+				default:
+					loop = true;
+					System.out.println("Would you like to play again? y/n");
+					choice = playerInput.nextLine().toLowerCase().charAt(0);
+			}
+		}while (loop);
 		System.exit(0);		
 	}
 
