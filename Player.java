@@ -2,18 +2,14 @@ import java.util.Scanner;
 
 public class Player {
     private Monkey monkey;
-    private int wager;
     private int wallet;
     private int buyIn;
-    private Scanner wagerChoice;
 
-    public Player(Monkey monkey, int wager) 
+    public Player(Monkey monkey) 
     {
         this.monkey = monkey;
-        this.wager = wager;
         //set wallet value initial
         this.wallet = 500;
-        this.wagerChoice = new Scanner(System.in);
     }
 
     public void setChoice(Monkey monkey) 
@@ -26,22 +22,12 @@ public class Player {
         return this.monkey;
     }
 
-    public void setWager(int wager)
-    {
-        this.wager = wager;
-    }
-
-    public int getWager() 
-    {
-        return this.wager;
-    }
-
-    public void setMoney(int wallet) 
+    public void setWallet(int wallet) 
     {
         this.wallet = wallet;
     }
 
-    public int getMoney() 
+    public int getWallet() 
     {
         return this.wallet;
     }
