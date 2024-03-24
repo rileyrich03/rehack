@@ -1,12 +1,12 @@
 
-public class player
+public class Player
 {
     private int monkeyID;
     private int wager;
     private int wallet;
 
 
-    public player(int monkeyID, int wager, int wallet)
+    public Player(int monkeyID, int wager, int wallet)
     {
         this.monkeyID = monkeyID;
         this.wager = wager;
