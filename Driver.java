@@ -67,7 +67,6 @@ public class Driver
             }
         }
 		player.setWallet(player.getWallet() - wager);   
-        System.exit(0);
 	}
 
 	public boolean checkEndGame()
