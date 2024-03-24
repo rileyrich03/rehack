@@ -9,9 +9,11 @@ public class Driver
     private Scanner playerInput;
     int wager;
 
-	public Driver() 
+	public Driver(String word) 
 	{
-        //create monkey array
+        this.word = word;
+
+		//create monkey array
         table = new Monkey[4];
 
         //create each monkey
@@ -27,9 +29,14 @@ public class Driver
         playerInput = new Scanner(System.in);
 	}
 	
-	public static void Main(String[] args)
+	public static void main(String[] args)
 	{
-        
+        Driver game = new Driver("Word");
+		for(Monkey monkey : game.table)
+		{
+			monkey.chooseWord();
+			System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
+		}
 	}
 
 	public void StartGame()

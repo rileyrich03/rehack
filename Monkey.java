@@ -20,7 +20,7 @@ public class Monkey{
 		this.word = new char[wordLength];
 	}
 
-	private void chooseWord()
+	public void chooseWord()
 	{
 		Random rand = new Random();
 		int numLetters = this.word.length;
@@ -34,6 +34,10 @@ public class Monkey{
 	public void setCorrect(int correct)
 	{
 		this.correct = correct;
+	}
+	public String printWord()
+	{
+		return new String(word);
 	}
 	public char[] getWord()
 	{
