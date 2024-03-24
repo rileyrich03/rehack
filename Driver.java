@@ -31,15 +31,18 @@ public class Driver
 	
 	public static void main(String[] args)
 	{
-        Driver game = new Driver("Word");
-		for(Monkey monkey : game.table)
-		{
-			monkey.chooseWord();
-			System.out.println("Monkey: " + monkey.getName() + " says " + monkey.printWord());
-		}
+
+        Driver game = new Driver();
+
+        game.startGame();
+
+        while(!game.checkEndGame())
+        {
+            
+        }
 	}
 
-	public void StartGame()
+	public void startGame()
 	{
         System.out.print("Choose a monkey's ID Badge");
         int monkeyChoice = playerInput.nextInt();
@@ -66,12 +69,20 @@ public class Driver
 
 	public boolean checkEndGame()
 	{
-		return false;
+		return player.getMoney() <= 0;
+
 	}
 
 	public boolean checkEndRound()
 	{
-		return false;
+		for (Monkey monkey : table) 
+        {
+            if(monkey.getCorrect() == this.word.length())
+            {
+                return true;
+            }
+        }
+        return false;
 	}
 
 	public boolean endGame()
@@ -79,9 +90,9 @@ public class Driver
 		return false;
 	}
 
-	public boolean endRound()
+	public void endRound()
 	{
-		return false;
+		if(player.getChoice() == )
 	}
 
 	public void setWord(String word)

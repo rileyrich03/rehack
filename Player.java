@@ -1,28 +1,28 @@
 import java.util.Scanner;
 
 public class Player {
-    private int monkeyID;
+    private Monkey monkey;
     private int wager;
     private int wallet;
     private int buyIn;
     Scanner wagerChoice;
 
-    public Player(int monkeyID, int wager, int wallet) 
+    public Player(Monkey monkey, int wager, int wallet) 
     {
-        this.monkeyID = monkeyID;
+        this.monkey = monkey;
         this.wager = wager;
         this.wallet = wallet;
         this.wagerChoice = new Scanner(System.in);
     }
 
-    public void setChoice(int monkeyID) 
+    public void setChoice(Monkey monkey) 
     {
-        this.monkeyID = monkeyID;
+        this.monkey = monkey;
     }
 
-    public int getChoice() 
+    public Monkey getChoice() 
     {
-        return this.monkeyID;
+        return this.monkey;
     }
 
     public void setWager(int wager)
