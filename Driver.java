@@ -29,28 +29,27 @@ public class Driver
         playerInput = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args)
+	public void play()
 	{
-        Driver game = new Driver();
-		game.startGame();
+		startGame();
 		boolean roundFlag = false;
 		do
 		{
 			while(!roundFlag)
 			{
-				for(int i = 0;i < game.table.length; i++)
+				for(int i = 0;i < table.length; i++)
 				{
-					Monkey monkey = game.table[i];
+					Monkey monkey = table[i];
 					monkey.chooseGuess();
-					monkey.lookWord(game.word);
-					roundFlag = game.checkEndRound();
+					monkey.lookWord(word);
+					roundFlag = checkEndRound();
 					if(roundFlag)
-						i = game.table.length;
+						i = table.length;
 				}
 			}
-			game.endRound();
+			endRound();
 			roundFlag = false;
-		} while(!game.checkEndGame());
+		} while(!checkEndGame());
 		//game.endGame();
 	}
 
@@ -132,7 +131,7 @@ public class Driver
 			switch(choice)
 			{
 				case 'y':
-					main(null);
+					play();
 					break;
 				case 'n':
 					System.exit(0);
