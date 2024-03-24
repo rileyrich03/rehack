@@ -35,6 +35,9 @@ public class Monkey{
 			{
 				correct++;
 				System.out.print(this.name.toUpperCase() + " HAS LOCKED IN ");
+				for(int j = 0; j < correct; j++)
+				System.out.print(guess[j]);
+				System.out.println();
 				try
 				{
 					TimeUnit.MILLISECONDS.sleep(350);
@@ -44,9 +47,7 @@ public class Monkey{
 					System.out.println("ERROR ERROR ERROR");
 					System.exit(0);
 				}
-				for(int j = 0; j < correct; j++)
-				System.out.print(guess[j]);
-				System.out.println();
+
 			}
 			else
 				return false;
