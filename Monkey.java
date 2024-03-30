@@ -28,31 +28,31 @@ public class Monkey{
 
 	public boolean lookWord(String word)
 	{
+		boolean flag = false;
 		char[] wordArr = word.toCharArray();
 		for(int i = correct; i < guess.length; i++)
 		{
 			if(wordArr[i] == guess[i])
 			{
+				flag = true;
 				correct++;
-				System.out.print(this.name.toUpperCase() + " HAS LOCKED IN ");
-				for(int j = 0; j < correct; j++)
-				System.out.print(guess[j]);
-				System.out.println();
-				try
-				{
-					TimeUnit.MILLISECONDS.sleep(350);
-				} 
-				catch (InterruptedException ie) 
-				{
-					System.out.println("ERROR ERROR ERROR");
-					System.exit(0);
-				}
+				//System.out.print(this.name.toUpperCase() + " HAS LOCKED IN ");
+				//for(int j = 0; j < correct; j++)
+				//	System.out.print(guess[j]);
+				//System.out.println();
+				//try
+				//{
+				//	TimeUnit.MILLISECONDS.sleep(350);
+				//} 
+				//catch (InterruptedException ie) 
+				//{
+				//	System.out.println("ERROR ERROR ERROR");
+				//	System.exit(0);
+				//}
 
 			}
-			else
-				return false;
 		}
-		return true;
+		return flag;
 	}
 	public int getCorrect()
 	{
@@ -92,5 +92,10 @@ public class Monkey{
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	public String toString()
+	{
+		String string = name + ": " + new String(guess);
+		return string;
 	}
 }

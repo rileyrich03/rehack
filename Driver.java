@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class Driver
@@ -32,23 +33,40 @@ public class Driver
 	{
 		startGame();
 		boolean roundFlag = false;
-		do
-		{
+		boolean pause = false;
+		//do
+		//{
 			while(!roundFlag)
 			{
+				System.out.print("\033[H\033[2J");  
+				System.out.flush();  
+       			System.out.println("-------------------------------------------------");
 				for(int i = 0;i < table.length; i++)
 				{
 					Monkey monkey = table[i];
 					monkey.chooseGuess();
-					monkey.lookWord(word);
+					pause = monkey.lookWord(word);
+					System.out.println(monkey);
 					roundFlag = checkEndRound();
-					if(roundFlag)
-						i = table.length;
+				}
+				System.out.println("-------------------------------------------------");
+				if(pause)
+				{
+					try
+					{
+						TimeUnit.MILLISECONDS.sleep(600);
+					} 
+					catch (InterruptedException ie) 
+					{
+						System.out.println("ERROR ERROR ERROR");
+						System.exit(0);
+					}
+					pause = false;
 				}
 			}
 			endRound();
 			roundFlag = false;
-		} while(!checkEndGame());
+		//} while(!checkEndGame());
 		//game.endGame();
 	}
 
