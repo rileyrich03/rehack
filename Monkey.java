@@ -23,7 +23,7 @@ public class Monkey{
 		Random rand = new Random();
 		int numLetters = this.guess.length;
 		for(int i = correct; i < numLetters; i++)
-			guess[i] = (char)(65 + rand.nextInt(26));
+			guess[i] = (char)('A' + rand.nextInt(26));
 	}
 
 	public boolean lookWord(String word)
@@ -51,6 +51,8 @@ public class Monkey{
 				//}
 
 			}
+			else
+				return flag;
 		}
 		return flag;
 	}

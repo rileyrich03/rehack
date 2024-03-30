@@ -34,8 +34,8 @@ public class Driver
 		startGame();
 		boolean roundFlag = false;
 		boolean pause = false;
-		//do
-		//{
+		do
+		{
 			while(!roundFlag)
 			{
 				System.out.print("\033[H\033[2J");  
@@ -62,11 +62,21 @@ public class Driver
 						System.exit(0);
 					}
 					pause = false;
+				} else {
+					try
+					{
+						TimeUnit.MILLISECONDS.sleep(100);
+					} 
+					catch (InterruptedException ie) 
+					{
+						System.out.println("ERROR ERROR ERROR");
+						System.exit(0);
+					}
 				}
 			}
 			endRound();
 			roundFlag = false;
-		//} while(!checkEndGame());
+		} while(!checkEndGame());
 		//game.endGame();
 	}
 
@@ -129,7 +139,7 @@ public class Driver
 	{
 		for (Monkey monkey : table) 
         {
-            if(word.equals(monkey.printGuess()))
+            if(monkey.getCorrect() == word.length())
             {
 				winner = monkey;
                 return true;
