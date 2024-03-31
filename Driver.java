@@ -29,9 +29,10 @@ public class Driver
         playerInput = new Scanner(System.in);
 	}
 	
-	public void play()
+	public static void main(String[] args)
 	{
-		startGame();
+		Driver game = new Driver();
+		game.startGame();
 		boolean roundFlag = false;
 		boolean pause = false;
 		do
@@ -41,13 +42,13 @@ public class Driver
 				System.out.print("\033[H\033[2J");  
 				System.out.flush();  
        			System.out.println("-------------------------------------------------");
-				for(int i = 0;i < table.length; i++)
+				for(int i = 0;i < game.table.length; i++)
 				{
-					Monkey monkey = table[i];
+					Monkey monkey = game.table[i];
 					monkey.chooseGuess();
-					pause = monkey.lookWord(word);
+					pause = pause || monkey.lookWord(game.word);
 					System.out.println(monkey);
-					roundFlag = checkEndRound();
+					roundFlag = game.checkEndRound();
 				}
 				System.out.println("-------------------------------------------------");
 				if(pause)
@@ -74,9 +75,9 @@ public class Driver
 					}
 				}
 			}
-			endRound();
+			game.endRound();
 			roundFlag = false;
-		} while(!checkEndGame());
+		} while(!game.checkEndGame());
 		//game.endGame();
 	}
 
@@ -158,7 +159,7 @@ public class Driver
 			switch(choice)
 			{
 				case 'y':
-					play();
+					main(null);
 					break;
 				case 'n':
 					System.exit(0);

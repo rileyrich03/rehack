@@ -97,7 +97,9 @@ public class Monkey{
 	}
 	public String toString()
 	{
-		String string = name + ": " + new String(guess);
+		String locked = new String(guess).substring(0, correct).toUpperCase();
+		String loose = new String(guess).substring(correct).toLowerCase();
+		String string = name + ": " + locked + loose;
 		return string;
 	}
 }
